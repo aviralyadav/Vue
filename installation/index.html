@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>VueJS</title>
+	<link rel="stylesheet" href="">
+	<script src="vue.js"></script>
+</head>
+
+<body>
+	<div id="app">
+		<input type="text" v-on:input="changeTitle">
+		<input type="text" v-on:input="changeName">
+		<p>{{ title }} - <a v-bind:href="link" target="_blank">Google</a></p>
+		<p>{{ name }}</p>
+		<p>{{ seyHello() }}</p>
+	</div>
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				title: 'Hello World!',
+				name: 'Avi',
+				link: 'https://google.co.in'
+			},
+			methods: {
+				changeTitle: function (event) {
+					this.title = event.target.value;
+				},
+				changeName: function (event) {
+					this.name = event.target.value
+				},
+				seyHello: function() {
+					return this.title;
+				}
+			}
+		});
+	</script>
+</body>
+
+</html>
