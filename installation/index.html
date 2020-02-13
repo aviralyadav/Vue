@@ -7,25 +7,65 @@
 	<title>VueJS</title>
 	<link rel="stylesheet" href="">
 	<script src="vue.js"></script>
+	<style>
+		.demo {
+			width: 200px;
+			height: 200px;
+			display: inline-block;
+			background-color: darkgrey;
+		}
+		.red {
+			background-color: red;
+		}
+		.green {
+			background-color: green;
+		}
+	</style>
 </head>
 
 <body>
 	<div id="app">
 		<input type="text" v-on:input="changeTitle">
-		<input type="text" v-on:input="changeName">
-		<p>{{ title }} - <a v-bind:href="link" target="_blank">Google</a></p>
+		<input type="text" @input="changeName">
+		<p v-once>{{ title }} - <a :href="link" target="_blank">Google</a></p>
+		<!-- <p v-once>{{ title }} - <a v-bind:href="link" target="_blank">Google</a></p> -->
 		<p>{{ name }}</p>
 		<p>{{ seyHello() }}</p>
+		<button v-on:click="increase(2, $event)">Click Me</button>
+		<p>{{counter}}</p>
+		<hr>
+		<p v-html="finishedLink"></p>
+		<p v-on:mousemove="coordinateChange">
+			Coordinate: {{x}} / {{y}}
+			- <span v-on:mousemove.stop="">DEAD SPOT</span>
+		</p>
+		<input type="text" v-on:keyup.enter.space="alert">
+		<p>Two way binding</p>
+		<input type="text" v-model="name">
+		<p>{{name}}</p>
+		<div>
+			<div class="demo" :class="{red: attachRed}" @click="attachRed = !attachRed"></div>
+			<div class="demo" :class="{green: attachGreen}" @click="attachGreen = !attachGreen"></div>
+		</div>
 	</div>
 	<script>
 		new Vue({
 			el: '#app',
 			data: {
+				attachRed: false,
+				attachGreen: false,
 				title: 'Hello World!',
 				name: 'Avi',
-				link: 'https://google.co.in'
+				link: 'https://google.co.in',
+				finishedLink: "<a href='http://google.co.in'>Google</a>",
+				counter: 0,
+				x: 0,
+				y: 0
 			},
 			methods: {
+				alert: function() {
+					alert('Alert!');
+				},
 				changeTitle: function (event) {
 					this.title = event.target.value;
 				},
@@ -33,7 +73,15 @@
 					this.name = event.target.value
 				},
 				seyHello: function() {
+					this.title = 'Hello!!!!'
 					return this.title;
+				},
+				increase: function (step, event){
+					this.counter += step; 
+				},
+				coordinateChange: function(event) {
+					this.x = event.clientX;
+					this.y = event.clientY;
 				}
 			}
 		});
