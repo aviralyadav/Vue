@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>VueJS</title>
+    <link rel="stylesheet" href="" />
+    <script src="vue.js"></script>
+    <style>
+      .demo {
+        width: 200px;
+        height: 200px;
+        display: inline-block;
+        background-color: darkgrey;
+      }
+      .red {
+        background-color: red;
+      }
+      .green {
+        background-color: green;
+      }
+    </style>
+  </head>
+
+  <body>
+    
+    <div id="app1">
+        {{title}}
+        </div>
+        <div id="app2">
+          {{name}}
+          <button @click="changeData">
+          Change in VM1
+          </button>
+        </div>
+
+    <script>
+      var vm1 = new Vue({
+        el: "#app1",
+        data: {
+          title: "Vue 1"
+        }
+      });
+
+      setTimeout(function() {
+        vm1.title = "Changed by Timer!";
+      }, 2000);
+
+      var vm2 = new Vue({
+        el: "#app2",
+        data: {
+          name: "aviral"
+        },
+        methods: {
+          changeData: function() {
+            vm1.title = "changed by vm2";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
