@@ -29,9 +29,12 @@
         </div>
         <div id="app2">
           {{name}}
-          <button @click="changeData">
+          <button @click="changeData" ref="VM1">
           Change in VM1
           </button>
+        </div>
+        <div id="app3">
+          
         </div>
 
     <script>
@@ -47,6 +50,9 @@
       }, 2000);
 
       vm1.newProp = 'New';
+      // data1 = {
+      //     name: "aviral"
+      //   },
 
       var vm2 = new Vue({
         el: "#app2",
@@ -56,9 +62,16 @@
         methods: {
           changeData: function() {
             vm1.title = "changed by vm2";
+            console.log(this.$refs);
+            
           }
         }
       });
+      var vm3 = new Vue({
+        template: '<h1>Hello</h1>'
+      })
+      vm3.$mount('#app3')
+      console.log(vm1.$data === vm2.$data);
     </script>
   </body>
 </html>
