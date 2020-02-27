@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>VueJS</title>
+    <link rel="stylesheet" href="" />
+    <script src="vue.js"></script>
+    <style>
+        .demo {
+            width: 200px;
+            height: 200px;
+            display: inline-block;
+            background-color: darkgrey;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .green {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app1">
+        {{title}}
+    </div>
+    <div id="app2">
+        {{name}}
+        <button @click="name = 'changed title'" ref="VM1">
+            Change in VM1
+        </button>
+        <button @click="destroy">Destroy</button>
+    </div>
+
+    <script>
+        var vm1 = new Vue({
+            el: "#app1",
+            data: {
+                title: "Vue 1"
+            }
+        });
+
+
+        // data1 = {
+        //     name: "aviral"
+        //   },
+
+        new Vue({
+            el: "#app2",
+            data: {
+                name: "aviral"
+            },
+            beforeCreate() {
+                console.log('beforeCreate()');
+            },
+            created() {
+                console.log('created()');
+            },
+            beforeMount() {
+                console.log('beforeMount()');
+            },
+            mounted() {
+                console.log('mounted()');
+            },
+            beforeUpdate() {
+                console.log('beforeUpdate()');
+            },
+            updated() {
+                console.log('updated()');
+            },
+            beforeDestroy() {
+                console.log('beforeDestroy()');
+            },
+            destroyed() {
+                console.log('destroyed()');
+            },
+            methods: {
+                changeData: function () {
+                    vm1.title = "changed by vm2";
+                    console.log(this.$refs);
+
+                },
+                destroy: function() {
+                    this.$destroy();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
