@@ -33,7 +33,11 @@ import {fruitMixin} from './FruitMixin';
                 text: 'Hello There',
             }
         },
-        
+        // filters: {
+        //     toUpperCase(val) {
+        //         return val.toUpperCase();
+        //     }
+        // }
     }
 </script>
 
