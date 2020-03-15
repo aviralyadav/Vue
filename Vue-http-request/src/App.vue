@@ -14,41 +14,46 @@
         <div class="form-group">
           <button @click="onSubmit" class="btn btn-primary">Submit</button>
         </div>
+        <hr>
+        <div class="form-group">
+          <button @click="getData" class="btn btn-primary">Get Data</button>
+        </div>
+        <br>
+        <div class="list-group">
+          <div class="list-group-item" v-for="u in users" :key="u.username">{{ u.username }} - {{ u.email }}</div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-var url = "https://jsonplaceholder.typicode.com/todos";
 export default {
   data() {
     return {
       user: {
         username: "",
         email: ""
-      }
+      },
+      users: []
     };
   },
   methods: {
     onSubmit() {
     //   console.log(this.user);
-      this.$http.post('https://vue-data-8b889.firebaseio.com/data.json', this.user)
-        .then(res => console.log(res), err => console.log(err));
+      this.$http.post('data.json', this.user)
+        .then(res => {console.log(res);this.user.username = '';this.user.email = ''}, err => console.log(err));
+    },
+    getData() {
+      this.$http.get('data.json')
+        .then(response => response.json())
+        .then(data => {
+          const dataArr  = Object.values(data);
+          console.log(dataArr);
+          this.users = dataArr;
+          });
     }
   },
-  created() {
-    this.$http.get(url).then(
-      response => {
-        // get body data
-        // this.someData = response.body;
-        console.log(response.body);
-      },
-      response => {
-        // error callback
-      }
-    );
-  }
 };
 </script>
 
