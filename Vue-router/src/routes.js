@@ -7,14 +7,18 @@ import UserEdit from './components/User/UserEdit.vue'
 
 export const routes = [
     {
-        path: '', component: Home
+        path: '', component: Home, name: 'Home'
     },
     {
         path: '/user', component: User, children: [
             { path: '', component: UserStart },
-            { path: ':id', component: UserDetail },
-            { path: ':id/edit', component: UserEdit },
+            { path: ':id', component: UserDetail, beforeEnter: (to, from, next) => {
+                console.log('Router level guard');
+                next();
+            } },
+            { path: ':id/edit', component: UserEdit, name: 'userEdit' },
         ]
     },
-    { path: '/profile/:id', component: Profile }
+    { path: '/profile/:id', component: Profile },
+    { path: '*', redirect: '/' }
 ];

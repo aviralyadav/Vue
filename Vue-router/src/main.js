@@ -10,6 +10,11 @@ const router = new VueRouter({
   mode: 'history'
 });
 
+router.beforeEach((to, from, next) => {
+  console.log('Global Guard');
+  next();
+});
+
 new Vue({
   el: '#app',
   router,

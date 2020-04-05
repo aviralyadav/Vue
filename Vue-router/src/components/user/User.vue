@@ -22,7 +22,7 @@ export default {
     },
     methods: {
         navigateToHome() {
-            this.$router.push('/');
+            this.$router.push({path: 'Home'});//name is Home
         }
     },
 };
