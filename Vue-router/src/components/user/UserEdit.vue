@@ -15,6 +15,9 @@ export default {
         } else {
             next(false);
         }
+    },
+    beforeRouteLeave (to, from, next) {
+        // ... for staying user in same page for some reason
     }
 }
 </script>
