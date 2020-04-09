@@ -6,13 +6,15 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
         counter: 0,
+        value:10,
         status: true
     },
     getters: {
         doubleCounter: state => {
             return state.counter;
         },
-        status: state => state.status
+        status: state => state.status,
+        value: state => state.value
     },
     mutations: { /// mutations are synchronous so for aync task or api calls we need to call mutations from actions
         increment: (state, payload) => {
@@ -22,6 +24,9 @@ export const store = new Vuex.Store({
         decrement: (state, payload) => {
             state.counter -= payload;
             state.status = false;
+        },
+        setValue: (state, payload) => {
+            state.value = payload;
         }
     },
     actions: { // actions are async
@@ -40,6 +45,9 @@ export const store = new Vuex.Store({
             setTimeout(()=>{
                 commit('decrement', payload.by)
             } ,payload.duration);
+        },
+        setValue: ({commit}, payload) => {
+            commit('setValue', payload);
         }
     }
 })
