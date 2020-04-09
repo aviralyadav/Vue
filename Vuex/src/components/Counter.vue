@@ -11,6 +11,7 @@
 
 <script>
 import { mapGetters, mapMutations, mapActions } from 'vuex';
+import * as types from '../store/types';
     export default {
         methods: {
             // ...mapMutations(['increment', 'decrement'])
@@ -19,7 +20,9 @@ import { mapGetters, mapMutations, mapActions } from 'vuex';
             ])
         },
         computed: {
-            ...mapGetters(['status'])
+            ...mapGetters({
+                status: types.STATUS
+            })
         },
     }
 </script>
